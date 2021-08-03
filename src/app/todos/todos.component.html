@@ -1,6 +1,14 @@
 <div *ngIf="!loading">
-  <ul class="conntainer" *ngIf="todosService.todos.length; else noTodos">
-    <li *ngFor="let todo of todosService.todos; let i = index" class="list">
+
+  <div class="filter">
+    <input type="text"
+           class="input-filter"
+           placeholder="Filter todos by title..."
+           [(ngModel)]="searchString">
+  </div>
+
+  <ul class="container" *ngIf="todosService.todos.length; else noTodos">
+    <li *ngFor="let todo of todosService.todos | todosFilter: searchString; let i = index" class="list">
     <span [class.done]="todo.completed">
       <input
         type="checkbox"
